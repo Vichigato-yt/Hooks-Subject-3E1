@@ -1,173 +1,100 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import "@/global.css";
+import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const HomeScreen = () => {
-  const playlists = [
-    { id: 1, title: 'Mi Playlist 1', songs: 24 },
-    { id: 2, title: 'Vibes Nocturnos', songs: 18 },
-    { id: 3, title: 'Gym Mix', songs: 32 },
-    { id: 4, title: 'Relajación', songs: 15 },
+const DashboardScreen = () => {
+  const [activeTab, setActiveTab] = useState('todas');
+
+  const songs = [
+    { id: 1, title: 'Canción 1', artist: 'Artista 1', duration: '3:45' },
+    { id: 2, title: 'Canción 2', artist: 'Artista 2', duration: '4:12' },
+    { id: 3, title: 'Canción 3', artist: 'Artista 3', duration: '3:28' },
+    { id: 4, title: 'Canción 4', artist: 'Artista 4', duration: '3:56' },
+    { id: 5, title: 'Canción 5', artist: 'Artista 5', duration: '4:03' },
+    { id: 6, title: 'Canción 6', artist: 'Artista 6', duration: '3:34' },
+    { id: 7, title: 'Canción 7', artist: 'Artista 7', duration: '4:21' },
+    { id: 8, title: 'Canción 8', artist: 'Artista 8', duration: '3:50' },
   ];
-
-  return (
-    <ScrollView className="flex-1 bg-black">
-      <View className="px-4 pt-6 pb-4">
-        <Text className="text-3xl font-bold text-white mb-6">Hola 👋</Text>
-        
-        <Text className="text-lg font-semibold text-white mb-4">Tus Playlists</Text>
-        
-        {playlists.map((playlist) => (
-          <TouchableOpacity
-            key={playlist.id}
-            className="bg-gray-900 rounded-lg p-4 mb-3 flex-row items-center justify-between border border-gray-800"
-          >
-            <View>
-              <Text className="text-white font-semibold text-base">{playlist.title}</Text>
-              <Text className="text-gray-400 text-sm">{playlist.songs} canciones</Text>
-            </View>
-            <Play size={24} color="#a855f7" />
-          </TouchableOpacity>
-        ))}
-      </View>
-    </ScrollView>
-  );
-};
-
-// Pantalla de Info
-const InfoScreen = () => {
-  const recentSongs = [
-    { id: 1, title: 'Canción 1', artist: 'Artista A' },
-    { id: 2, title: 'Canción 2', artist: 'Artista B' },
-    { id: 3, title: 'Canción 3', artist: 'Artista C' },
-  ];
-
-  return (
-    <ScrollView className="flex-1 bg-black">
-      <View className="px-4 pt-6 pb-4">
-        <Text className="text-2xl font-bold text-white mb-6">Información</Text>
-        
-        <View className="bg-gradient-to-b from-purple-900 to-gray-900 rounded-lg p-6 mb-6">
-          <Music size={50} color="#a855f7" />
-          <Text className="text-white text-xl font-bold mt-4">Reciente</Text>
-        </View>
-        
-        <Text className="text-lg font-semibold text-white mb-4">Últimas Canciones</Text>
-        
-        {recentSongs.map((song) => (
-          <View key={song.id} className="bg-gray-900 rounded-lg p-4 mb-3 border border-gray-800">
-            <Text className="text-white font-semibold">{song.title}</Text>
-            <Text className="text-gray-400 text-sm">{song.artist}</Text>
-          </View>
-        ))}
-      </View>
-    </ScrollView>
-  );
-};
-
-// Pantalla de Tipo de Música
-const MusicTypeScreen = () => {
-  const genres = [
-    { id: 1, name: 'Pop', color: 'bg-pink-600' },
-    { id: 2, name: 'Rock', color: 'bg-red-600' },
-    { id: 3, name: 'Hip-Hop', color: 'bg-yellow-600' },
-    { id: 4, name: 'Jazz', color: 'bg-blue-600' },
-    { id: 5, name: 'Clásica', color: 'bg-indigo-600' },
-    { id: 6, name: 'Electrónica', color: 'bg-purple-600' },
-  ];
-
-  return (
-    <ScrollView className="flex-1 bg-black">
-      <View className="px-4 pt-6 pb-4">
-        <Text className="text-2xl font-bold text-white mb-6">Géneros</Text>
-        
-        {genres.map((genre) => (
-          <TouchableOpacity
-            key={genre.id}
-            className={`${genre.color} rounded-lg p-6 mb-4 justify-center items-center`}
-          >
-            <Text className="text-white text-2xl font-bold">{genre.name}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    </ScrollView>
-  );
-};
-
-// Pantalla de Tabs (Info, Dashboard, Tipo Música, Tabs)
-const TabsScreen = () => {
-  const [activeTab, setActiveTab] = useState('info');
 
   return (
     <View className="flex-1 bg-black">
-      <View className="flex-1">
-        {activeTab === 'info' && <InfoScreen />}
-        {activeTab === 'dashboard' && <HomeScreen />}
-        {activeTab === 'music' && <MusicTypeScreen />}
-      </View>
-      
-      <View className="flex-row border-t border-gray-800 bg-gray-900">
-        <TouchableOpacity
-          onPress={() => setActiveTab('info')}
-          className={`flex-1 py-3 items-center ${activeTab === 'info' ? 'border-t-2 border-purple-600' : ''}`}
-        >
-          <Text className={activeTab === 'info' ? 'text-purple-600 font-bold' : 'text-gray-400'}>
-            Info
-          </Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-          onPress={() => setActiveTab('dashboard')}
-          className={`flex-1 py-3 items-center ${activeTab === 'dashboard' ? 'border-t-2 border-purple-600' : ''}`}
-        >
-          <Text className={activeTab === 'dashboard' ? 'text-purple-600 font-bold' : 'text-gray-400'}>
-            Dashboard
-          </Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-          onPress={() => setActiveTab('music')}
-          className={`flex-1 py-3 items-center ${activeTab === 'music' ? 'border-t-2 border-purple-600' : ''}`}
-        >
-          <Text className={activeTab === 'music' ? 'text-purple-600 font-bold' : 'text-gray-400'}>
-            Tipo Música
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
+      {/* Header */}
+      <View className="pt-12 pb-6 px-6 bg-purple-900">
+        <View className="flex-row items-center justify-between mb-6">
+          <Text className="text-3xl font-black text-purple-400">BIBLIOTECA</Text>
+          <View className="flex-row gap-3">
+            {['search-outline', 'settings-outline'].map((icon, i) => (
+              <TouchableOpacity
+                key={i}
+                className="w-10 h-10 rounded-full bg-purple-800 border-2 border-purple-500 items-center justify-center"
+              >
+                <Ionicons name={icon as any} size={20} color="#D8B4FE" />
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
 
-// Pantalla de Now Playing
-const NowPlayingScreen = () => {
-  return (
-    <View className="flex-1 bg-black justify-center items-center px-6">
-      <View className="bg-gray-900 w-64 h-64 rounded-2xl mb-8 justify-center items-center border-2 border-purple-600">
-        <Music size={100} color="#a855f7" />
+        {/* Search Bar */}
+        <View className="bg-purple-800 rounded-2xl px-4 py-3 flex-row items-center border-2 border-purple-500">
+          <Ionicons name="search-outline" size={20} color="#D8B4FE" />
+          <TextInput
+            className="flex-1 text-white ml-3 text-base font-bold"
+            placeholder="Buscar canciones..."
+            placeholderTextColor="#A78BFA"
+          />
+        </View>
       </View>
-      
-      <Text className="text-2xl font-bold text-white mb-2">Canción Actual</Text>
-      <Text className="text-gray-400 mb-8">Artista Desconocido</Text>
-      
-      <View className="flex-row gap-6">
-        <TouchableOpacity className="bg-gray-800 p-4 rounded-full">
-          <Text className="text-white">⏮</Text>
-        </TouchableOpacity>
-        <TouchableOpacity className="bg-purple-600 p-6 rounded-full">
-          <Play size={30} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity className="bg-gray-800 p-4 rounded-full">
-          <Text className="text-white">⏭</Text>
-        </TouchableOpacity>
+
+      {/* Tabs */}
+      <View className="flex-row px-6 pt-6 gap-3 border-b border-purple-700">
+        {['todas', 'favoritas', 'recientes'].map((tab) => (
+          <TouchableOpacity
+            key={tab}
+            className={`pb-3 px-3 border-b-2 ${activeTab === tab ? 'border-purple-400' : 'border-transparent'}`}
+            onPress={() => setActiveTab(tab)}
+          >
+            <Text className={`font-black tracking-widest ${activeTab === tab ? 'text-purple-400' : 'text-gray-500'}`}>
+              {tab.toUpperCase()}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
+
+      {/* Song List */}
+      <ScrollView className="flex-1 px-6 pt-4">
+        {songs.map((song) => (
+          <TouchableOpacity
+            key={song.id}
+            className="flex-row items-center mb-4 p-3 bg-purple-800 rounded-lg border border-purple-700 active:opacity-70"
+          >
+            {/* Album Art */}
+            <View className="w-16 h-16 rounded-lg bg-purple-700 items-center justify-center mr-4">
+              <Ionicons name="musical-notes" size={28} color="#D8B4FE" />
+            </View>
+
+            {/* Song Info */}
+            <View className="flex-1">
+              <Text className="text-white font-black text-base mb-1 tracking-widest">{song.title}</Text>
+              <Text className="text-gray-300 font-semibold text-sm">{song.artist}</Text>
+            </View>
+
+            {/* Duration & Actions */}
+            <View className="flex-row items-center gap-3">
+              <Text className="text-gray-400 font-bold text-sm">{song.duration}</Text>
+              <TouchableOpacity className="w-10 h-10 rounded-full bg-purple-600 items-center justify-center">
+                <Ionicons name="play" size={18} color="#D8B4FE" />
+              </TouchableOpacity>
+              <TouchableOpacity className="w-10 h-10 rounded-full bg-purple-700 items-center justify-center">
+                <Ionicons name="heart-outline" size={18} color="#D8B4FE" />
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        ))}
+        <View className="pb-6" />
+      </ScrollView>
     </View>
   );
-};
 };
 
 export default DashboardScreen;
