@@ -1,4 +1,4 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
 
@@ -8,11 +8,20 @@ const Mainlayout = () => {
             headerStyle: {
                 backgroundColor: "black"
             },
-            headerTintColor: "white"
+            headerTintColor: "white",
+            headerShown:false,
         }}>
             <Tabs.Screen name="DashboardScreen" options={{
-                title: "",
+                title: "Biblioteca",
                 tabBarIcon: ()=> <MaterialCommunityIcons name="view-dashboard" size={24} color="black" />
+            }}></Tabs.Screen>
+            <Tabs.Screen name="nowPlaying" options={{
+                title: "Now Playing",
+                tabBarIcon: ()=> <Ionicons name="musical-notes" size={24} color="black" />
+            }}></Tabs.Screen>
+            <Tabs.Screen name="settings" options={{
+                title: "Settings",
+                tabBarIcon: ()=> <Ionicons name="settings-sharp" size={24} color="black" />
             }}></Tabs.Screen>
         </Tabs>
     );    

@@ -96,12 +96,10 @@ const DashboardScreen = () => {
             {/* Duration & Play Button */}
             <View className="flex-row items-center justify-between">
               <Text className="text-gray-400 font-bold text-sm">{song.duration}</Text>
-              <TouchableOpacity 
-              onPress={() => {
-                router.push("./nowPlaying");
+              <TouchableOpacity onPress={() => {
+                router.push("/nowPlaying");
                 selectionAsync();
-                }}
-                className="w-8 h-8 rounded-full bg-purple-600 items-center justify-center">
+              }}className="w-8 h-8 rounded-full bg-purple-600 items-center justify-center">
                 <Ionicons name="play" size={27} color="#D8B4FE" />
               </TouchableOpacity>
             </View>
