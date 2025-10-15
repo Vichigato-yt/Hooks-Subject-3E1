@@ -1,12 +1,13 @@
 import "@/global.css";
 import { Ionicons } from '@expo/vector-icons';
+import { selectionAsync } from "expo-haptics";
+import { router } from "expo-router";
 import React, { useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 interface LoginProps {
   setIsLogin: (value: boolean) => void;
 }
-
 export default function Login({ setIsLogin }: LoginProps) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -36,10 +37,10 @@ export default function Login({ setIsLogin }: LoginProps) {
         <View>
           <Text className="text-purple-400 font-black text-sm mb-3 tracking-widest">USERNAME</Text>
           <View className="bg-gradient-to-r from-purple-800 to-purple-900 rounded-2xl px-4 py-4 flex-row items-center border-2 border-purple-400">
-            <Ionicons name="person-outline" size={20} color="#D8B4FE" />
+            <Ionicons name="person" size={20} color="#D8B4FE" />
             <TextInput
               className="flex-1 text-white ml-3 text-base font-bold"
-              placeholder="TU NOMBRE"
+              placeholder="NOMBRE DE USUARIO AQUI"
               placeholderTextColor="#A78BFA"
             />
           </View>
@@ -72,7 +73,13 @@ export default function Login({ setIsLogin }: LoginProps) {
         </TouchableOpacity>
 
         {/* Botón Principal */}
-        <TouchableOpacity className="bg-gradient-to-r from-purple-700 to-purple-900 rounded-3xl py-4 border-4 border-purple-500 shadow-2xl active:opacity-75">
+        <TouchableOpacity 
+          onPress={() => {
+            router.push("/DashboardScreen");
+            selectionAsync();
+          }}
+          className="bg-gradient-to-r from-purple-700 to-purple-900 rounded-3xl py-4 border-4 border-purple-500 shadow-2xl active:opacity-75">
+          
           <Text className="text-purple-300 text-center font-black text-lg tracking-widest">¡ROCK!</Text>
         </TouchableOpacity>
 

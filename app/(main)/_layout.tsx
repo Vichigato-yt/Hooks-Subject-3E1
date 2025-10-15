@@ -11,7 +11,7 @@ const Mainlayout = () => {
             headerTintColor: "white"
         }}>
             <Tabs.Screen name="DashboardScreen" options={{
-                title: "Volver",
+                title: "",
                 tabBarIcon: ()=> <MaterialCommunityIcons name="view-dashboard" size={24} color="black" />
             }}></Tabs.Screen>
         </Tabs>

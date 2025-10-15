@@ -7,20 +7,29 @@ const DashboardScreen = () => {
   const [activeTab, setActiveTab] = useState('todas');
 
   const songs = [
-    { id: 1, title: 'Canción 1', artist: 'Artista 1', duration: '3:45' },
-    { id: 2, title: 'Canción 2', artist: 'Artista 2', duration: '4:12' },
-    { id: 3, title: 'Canción 3', artist: 'Artista 3', duration: '3:28' },
-    { id: 4, title: 'Canción 4', artist: 'Artista 4', duration: '3:56' },
-    { id: 5, title: 'Canción 5', artist: 'Artista 5', duration: '4:03' },
-    { id: 6, title: 'Canción 6', artist: 'Artista 6', duration: '3:34' },
-    { id: 7, title: 'Canción 7', artist: 'Artista 7', duration: '4:21' },
-    { id: 8, title: 'Canción 8', artist: 'Artista 8', duration: '3:50' },
+    { id: 1, title: 'Highway to Hell', artist: 'AC/DC', duration: '3:28', category: 'rock' },
+    { id: 2, title: 'Master of Puppets', artist: 'Metallica', duration: '8:36', category: 'metal' },
+    { id: 3, title: 'Smoke on the Water', artist: 'Deep Purple', duration: '5:40', category: "rock 70's" },
+    { id: 4, title: 'Back in Black', artist: 'AC/DC', duration: '4:15', category: 'heavy rock' },
+    { id: 5, title: 'Paranoid', artist: 'Black Sabbath', duration: '2:53', category: "rock 70's" },
+    { id: 6, title: 'Ace of Spades', artist: 'Motörhead', duration: '2:47', category: 'metal' },
+    { id: 7, title: 'We´ll be back', artist: 'Megadeth', duration: '4:50', category: 'metal' },
+    { id: 8, title: 'Breaking the Law', artist: 'Judas Priest', duration: '2:34', category: 'heavy rock' },
+    { id: 9, title: 'Baby Blue', artist: 'Badfinger', duration: '2:34', category: "rock 70's" },
+    { id: 10, title: 'Panama', artist: 'Van Halen', duration: '2:34', category: "heavy rock" },
   ];
+  const categories = {
+    'Rock': songs.filter(song => song.category === 'rock'),
+    'Heavy Rock': songs.filter(song => song.category === 'heavy rock'),
+    'Metal': songs.filter(song => song.category === 'metal'),
+    "Rock de los 70's": songs.filter(song => song.category === "rock 70's"),
+  };
+    
 
   return (
     <View className="flex-1 bg-black">
       {/* Header */}
-      <View className="pt-12 pb-6 px-6 bg-purple-900">
+      <View className="pt-12 pb-6 px-6">
         <View className="flex-row items-center justify-between mb-6">
           <Text className="text-3xl font-black text-purple-400">BIBLIOTECA</Text>
           <View className="flex-row gap-3">
@@ -61,38 +70,43 @@ const DashboardScreen = () => {
         ))}
       </View>
 
-      {/* Song List */}
-      <ScrollView className="flex-1 px-6 pt-4">
-        {songs.map((song) => (
-          <TouchableOpacity
+      {/* Grid of Songs */}
+      <ScrollView className="px-6 pt-4">
+  {Object.entries(categories).map(([categoryName, categorySongs]) => (
+    <View key={categoryName} className="mb-8">
+      <Text className="text-purple-400 text-xl font-black mb-4">{categoryName.toUpperCase()}</Text>
+
+      <View className="justify-between flex-wrap flex-row">
+        {categorySongs.map((song) => (
+          <View
             key={song.id}
-            className="flex-row items-center mb-4 p-3 bg-purple-800 rounded-lg border border-purple-700 active:opacity-70"
+            className="w-[48%] mb-4 p-4 bg-purple-800 rounded-xl border-2 border-purple-500 shadow-md shadow-purple-900"
           >
             {/* Album Art */}
-            <View className="w-16 h-16 rounded-lg bg-purple-700 items-center justify-center mr-4">
-              <Ionicons name="musical-notes" size={28} color="#D8B4FE" />
+            <View className="w-full h-32 rounded-lg bg-purple-700 items-center justify-center mb-4">
+              <Ionicons name="musical-notes" size={30} color="#D8B4FE" />
             </View>
 
             {/* Song Info */}
-            <View className="flex-1">
-              <Text className="text-white font-black text-base mb-1 tracking-widest">{song.title}</Text>
-              <Text className="text-gray-300 font-semibold text-sm">{song.artist}</Text>
-            </View>
+            <Text className="text-white font-black text-base mb-1 tracking-wide">{song.title}</Text>
+            <Text className="text-gray-300 font-semibold text-sm mb-3">{song.artist}</Text>
 
-            {/* Duration & Actions */}
-            <View className="flex-row items-center gap-3">
+            {/* Duration & Play Button */}
+            <View className="flex-row items-center justify-between">
               <Text className="text-gray-400 font-bold text-sm">{song.duration}</Text>
-              <TouchableOpacity className="w-10 h-10 rounded-full bg-purple-600 items-center justify-center">
-                <Ionicons name="play" size={18} color="#D8B4FE" />
-              </TouchableOpacity>
-              <TouchableOpacity className="w-10 h-10 rounded-full bg-purple-700 items-center justify-center">
-                <Ionicons name="heart-outline" size={18} color="#D8B4FE" />
+              <TouchableOpacity className="w-8 h-8 rounded-full bg-purple-600 items-center justify-center">
+                <Ionicons name="play" size={16} color="#D8B4FE" />
               </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
         ))}
-        <View className="pb-6" />
-      </ScrollView>
+      </View>
+    </View>
+  ))}
+
+  <View className="pb-8" />
+</ScrollView>
+
     </View>
   );
 };
