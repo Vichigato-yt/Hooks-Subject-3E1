@@ -39,7 +39,6 @@ const NowPlaying = () => {
 
           {/* Barra de progreso */}
           <View className="h-2 bg-purple-700 rounded-full border border-purple-600">
-            <View className="h-full w-2/5 bg-purple-400 rounded-full" /> {/* 40% progreso */}
           </View>
         </View>
 

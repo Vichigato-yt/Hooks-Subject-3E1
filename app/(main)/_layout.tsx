@@ -19,7 +19,8 @@ const Mainlayout = () => {
                 title: "Now Playing",
                 tabBarIcon: ()=> <Ionicons name="musical-notes" size={24} color="black" />
             }}></Tabs.Screen>
-            <Tabs.Screen name="settings" options={{
+            <Tabs.Screen name="settings"
+            options={{
                 title: "Settings",
                 tabBarIcon: ()=> <Ionicons name="settings-sharp" size={24} color="black" />
             }}></Tabs.Screen>

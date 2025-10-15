@@ -64,7 +64,7 @@ export default function SettingsScreen() {
 
           {/* Botón cerrar sesión */}
           <TouchableOpacity
-            onPress={() => router.push('../app/index')}
+            onPress={() => router.push('/')}
             className="bg-purple-700 rounded-lg py-4 items-center"
           >
             <Text className="text-purple-200 font-black text-lg">Cerrar sesión</Text>

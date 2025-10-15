@@ -68,7 +68,10 @@ export default function Login({ setIsLogin }: LoginProps) {
         </View>
 
         {/* Forgot Password */}
-        <TouchableOpacity className="self-end">
+        <TouchableOpacity onPress={() => {
+          router.replace('/not-found');
+          selectionAsync();
+        }} className="self-end">
           <Text className="text-purple-400 text-sm font-black tracking-widest">¿OLVIDASTE?</Text>
         </TouchableOpacity>
 
