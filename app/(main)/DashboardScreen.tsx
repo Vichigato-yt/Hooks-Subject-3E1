@@ -1,5 +1,7 @@
 import "@/global.css";
 import { Ionicons } from '@expo/vector-icons';
+import { selectionAsync } from "expo-haptics";
+import { router } from "expo-router";
 import React, { useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
@@ -94,8 +96,13 @@ const DashboardScreen = () => {
             {/* Duration & Play Button */}
             <View className="flex-row items-center justify-between">
               <Text className="text-gray-400 font-bold text-sm">{song.duration}</Text>
-              <TouchableOpacity className="w-8 h-8 rounded-full bg-purple-600 items-center justify-center">
-                <Ionicons name="play" size={16} color="#D8B4FE" />
+              <TouchableOpacity 
+              onPress={() => {
+                router.push("./nowPlaying");
+                selectionAsync();
+                }}
+                className="w-8 h-8 rounded-full bg-purple-600 items-center justify-center">
+                <Ionicons name="play" size={27} color="#D8B4FE" />
               </TouchableOpacity>
             </View>
           </View>
